@@ -10,3 +10,4 @@ select date("ListedOnDate") as "dd",
 
 select sum("PrincipalRemaining"), sum("PrincipalRemaining")*0.3 from "MyInvestmentItem" where "LoanStatusCode" in (5)
 
+
