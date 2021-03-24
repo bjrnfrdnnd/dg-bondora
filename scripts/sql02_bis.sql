@@ -1,6 +1,5 @@
 -- '2021-03-01'
 
-
 WITH
 params0 AS (
     -- Parameters for down stream queries
