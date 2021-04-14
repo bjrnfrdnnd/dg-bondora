@@ -52,15 +52,15 @@ f as (
 g as (
     select
         mm as mm
-         , sum("PrincipalRemaining") as "total"
-        , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2) as "2"
-        , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5) as "5"
-        , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100) as "100"
-        , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4) as "4"
-        , (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2)) / sum("PrincipalRemaining") as "2f"
-        , (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5)) / sum("PrincipalRemaining") as "5f"
-        , (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100)) / sum("PrincipalRemaining") as "100f"
-        , (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4)) / sum("PrincipalRemaining") as "4f"
+         , round(sum("PrincipalRemaining")::numeric, 4) as "total"
+        , round((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2))::numeric, 4) as "2"
+        , round((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5))::numeric, 4) as "5"
+        , round((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100))::numeric, 4) as "100"
+        , round((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4))::numeric, 4) as "4"
+        , round(((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2)) / sum("PrincipalRemaining"))::numeric, 4) as "2f"
+        , round(((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5)) / sum("PrincipalRemaining"))::numeric, 4) as "5f"
+        , round(((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100)) / sum("PrincipalRemaining"))::numeric, 4) as "100f"
+        , round(((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4)) / sum("PrincipalRemaining"))::numeric, 4) as "4f"
     from e
             group by mm
 )
@@ -68,15 +68,15 @@ g as (
 h as (
     select
         date('9999-01-01') as mm
-         , sum("PrincipalRemaining") as "total"
-        , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2) as "2"
-        , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5) as "5"
-        , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100) as "100"
-        , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4) as "4"
-        , (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2)) / sum("PrincipalRemaining") as "2f"
-        , (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5)) / sum("PrincipalRemaining") as "5f"
-        , (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100)) / sum("PrincipalRemaining") as "100f"
-        , (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4)) / sum("PrincipalRemaining") as "4f"
+         , round((sum("PrincipalRemaining"))::numeric, 4) as "total"
+        , round((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2))::numeric, 4) as "2"
+        , round((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5))::numeric, 4) as "5"
+        , round((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100))::numeric, 4) as "100"
+        , round((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4))::numeric, 4) as "4"
+        , round(((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2)) / sum("PrincipalRemaining"))::numeric, 4) as "2f"
+        , round(((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5)) / sum("PrincipalRemaining"))::numeric, 4) as "5f"
+        , round(((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100)) / sum("PrincipalRemaining"))::numeric, 4) as "100f"
+        , round(((sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4)) / sum("PrincipalRemaining"))::numeric, 4) as "4f"
     from e
 )
 ,

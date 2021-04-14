@@ -1,7 +1,6 @@
 -- '2021-04-01'
 WITH
-params0 AS (
-    -- Parameters for down stream queries
+params0 AS (   -- Parameters for down stream queries
     SELECT
        80 AS max_bars
 )
