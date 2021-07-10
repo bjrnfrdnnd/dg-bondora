@@ -114,7 +114,7 @@ ges3 as (
 )
 ,
 ges4 as (
-select DATE_TRUNC('month',dd) AS mm,
+select date(DATE_TRUNC('month',dd))   AS mm,
        sum("SMP2") as "SMP2",
        sum("SMBuys") + sum("AuctionBuys") as "TotalBuys",
        sum("SMSells") as "SMSells",
