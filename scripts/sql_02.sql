@@ -5,7 +5,7 @@ select sum("PrincipalRemaining"), count(*) from "WhSecondMarketPublished" where 
 
 WITH params AS (
     -- Parameters for down stream queries
-    SELECT
+   closeh0   SELECT
        600 AS bucket_count,
        80 AS max_bars
 ),

@@ -1,0 +1,1 @@
+select distinct "LoanStatusCode" from "MyInvestmentItem";
