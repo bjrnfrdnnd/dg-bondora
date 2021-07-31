@@ -11,7 +11,8 @@ params0 AS (   -- Parameters for down stream queries
     , date(date_trunc('month', date("AdditionDateTime"))) as mm
     , sum("SoldInResale_Principal") as principal
     , sum("SoldInResale_Price") as price
-    from "Investments" where date(date_trunc('month', date("EndDateTime"))) = ? and "InvestmentStatus" ='Sold'
+    from "Investments"
+    where date(date_trunc('month', date("EndDateTime"))) = ? and "InvestmentStatus" ='Sold'
     group by date("AdditionDateTime")
 )
 , overall AS (
