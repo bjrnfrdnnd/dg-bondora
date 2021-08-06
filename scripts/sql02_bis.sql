@@ -1,4 +1,4 @@
--- '2021-07-01'
+-- '2021-08-01'
 WITH
 params0 AS (   -- Parameters for down stream queries
     SELECT
@@ -12,12 +12,15 @@ params0 AS (   -- Parameters for down stream queries
     , sum("SoldInResale_Principal") as principal
     , sum("SoldInResale_Price") as price
     from "Investments"
-    where date(date_trunc('month', date("EndDateTime"))) = ? and "InvestmentStatus" ='Sold'
+    where
+          date(date_trunc('month', date("EndDateTime"))) = ?
+      and
+          "InvestmentStatus" ='Sold'
     group by date("AdditionDateTime")
 )
 , overall AS (
     select t.*
-    , extract(month from age(max_month, min_month)) + 1 as cnt_months
+    , EXTRACT(year FROM age(max_month, min_month))*12 + EXTRACT(month FROM age(max_month, min_month)) as cnt_months
            from (
                    select
                     min(mm) as min_month
@@ -89,4 +92,6 @@ params0 AS (   -- Parameters for down stream queries
 -- Select which part of the query to display by changing the `FROM` target
 SELECT * FROM graph order by bucket_month desc
 -- SELECT * FROM sums
+-- SELECT * FROM overall
+
 ;
