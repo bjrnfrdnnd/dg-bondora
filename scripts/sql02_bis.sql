@@ -1,4 +1,4 @@
--- '2021-08-01'
+-- '2021-09-01'
 WITH
 params0 AS (   -- Parameters for down stream queries
     SELECT
@@ -20,7 +20,7 @@ params0 AS (   -- Parameters for down stream queries
 )
 , overall AS (
     select t.*
-    , EXTRACT(year FROM age(max_month, min_month))*12 + EXTRACT(month FROM age(max_month, min_month)) as cnt_months
+    , EXTRACT(year FROM age(max_month, min_month))*12 + EXTRACT(month FROM age(max_month, min_month)) +  1 as cnt_months
            from (
                    select
                     min(mm) as min_month

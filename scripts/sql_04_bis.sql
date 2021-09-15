@@ -114,7 +114,9 @@ ges3 as (
 )
 ,
 ges4 as (
-select date(DATE_TRUNC('month',dd))   AS mm,
+select
+       '0_month' as mm_s,
+       date(DATE_TRUNC('month',dd))   AS mm,
        sum("SMP2") as "SMP2",
        sum("SMBuys") + sum("AuctionBuys") as "TotalBuys",
        sum("SMSells") as "SMSells",
@@ -124,12 +126,43 @@ select date(DATE_TRUNC('month',dd))   AS mm,
     ges3
     group by DATE_TRUNC('month',dd)
 )
+,
+ges5 as (
+select
+       '1_year' as mm_s,
+       date(date_trunc('year', dd)) as mm,
+       sum("SMP2") as "SMP2",
+       sum("SMBuys") + sum("AuctionBuys") as "TotalBuys",
+       sum("SMSells") as "SMSells",
+       sum("SMBuys") as "SMBuys",
+       sum("AuctionBuys") as "AuctionBuys"
+    from
+    ges3
+    group by date(date_trunc('year', dd))
+)
+,
+ges6 as (
+select
+       '2_all' as mm_s,
+       date('9999-01-01') as mm,
+       sum("SMP2") as "SMP2",
+       sum("SMBuys") + sum("AuctionBuys") as "TotalBuys",
+       sum("SMSells") as "SMSells",
+       sum("SMBuys") as "SMBuys",
+       sum("AuctionBuys") as "AuctionBuys"
+    from
+    ges3
+)
 select
 *
 from
 --     ges3
 -- order by dd desc
      ges4
-order by mm desc
+union
+ select * from ges5
+union
+ select * from ges6
+order by mm_s, mm desc
 
 ;
