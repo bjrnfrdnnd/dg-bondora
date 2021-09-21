@@ -93,5 +93,5 @@ params0 AS (   -- Parameters for down stream queries
 SELECT * FROM graph order by bucket_month desc
 -- SELECT * FROM sums
 -- SELECT * FROM overall
-
+-- SELECT * FROM numbers
 ;
