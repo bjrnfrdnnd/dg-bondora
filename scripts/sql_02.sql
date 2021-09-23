@@ -12,8 +12,12 @@ WITH params AS (
 numbers AS (
     -- Change this query to select real data.
     -- For now we make random set of numbers.
-    SELECT EXTRACT('second' from (datetime_celery - "ListedOnDate"))*1000 as num from "WhSecondMarketPublished"
-
+--     SELECT EXTRACT('second' from (datetime_celery - "ListedOnDate"))*1000 as num from "WhSecondMarketPublished"
+    select "BuyDelay" as num from "WhSecondMarketPublished"
+    where
+    "Buy" = true
+--     and
+--           "Success" = true
 ),
 overall AS (
     SELECT
