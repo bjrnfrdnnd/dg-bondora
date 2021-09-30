@@ -15,7 +15,7 @@ numbers AS (
 --     SELECT EXTRACT('second' from (datetime_celery - "ListedOnDate"))*1000 as num from "WhSecondMarketPublished"
     select "BuyDelay" as num from "WhSecondMarketPublished"
     where
-    "Buy" = true
+    "Buy" =True
 --     and
 --           "Success" = true
 ),
