@@ -8,7 +8,3 @@ select date("ListedOnDate") as "dd",
        round(sum(case when "Success" then "PrincipalRemaining" else 0 end)::numeric, 4)  as "PRSuccess"
        from "WhSecondMarketPublished" group by date("ListedOnDate")  order by date("ListedOnDate") desc;
 
-
-select sum("PrincipalRemaining"), sum("PrincipalRemaining")*0.3 from "MyInvestmentItem" where "LoanStatusCode" in (5)
-
-
