@@ -7,8 +7,8 @@ with a as (
          , avg("PrincipalRemaining")            as "PrincipalRemaining"
          , avg("MeanInterestLoanStatus2")       as "MeanInterestLoanStatus2"
          , avg("MeanInterestBondora")           as "MeanInterestBondora"
-         , avg("MeanInterestLoanStatus2"/100 * "PrincipalRemainingLoanStatus2" / 12)       as "ProjecteMonthlyIncometLoanStatus2"
-         , avg("MeanInterestBondora"/100 * "PrincipalRemaining" / 12)       as "ProjecteMonthlyIncometBondora"
+         , avg("PrincipalRemainingLoanStatus2") as "ProjecteMonthlyIncomeLoanStatus2"
+         , avg("ProjecteMonthlyIncomeBondora")       as "ProjecteMonthlyIncomeBondora"
          , avg("TotalAvailableFromApi")         as "TotalAvailableFromApi"
     from "AccountSummary"
     group by date("ValidDateTime")
@@ -22,8 +22,8 @@ b as (
          , avg("PrincipalRemaining")            as "PrincipalRemaining"
          , avg("MeanInterestLoanStatus2")       as "MeanInterestLoanStatus2"
          , avg("MeanInterestBondora")           as "MeanInterestBondora"
-         , avg("MeanInterestLoanStatus2"/100 * "PrincipalRemainingLoanStatus2" / 12)       as "ProjecteMonthlyIncometLoanStatus2"
-         , avg("MeanInterestBondora"/100 * "PrincipalRemaining" / 12)       as "ProjecteMonthlyIncometBondora"
+         , avg("PrincipalRemainingLoanStatus2") as "ProjecteMonthlyIncomeLoanStatus2"
+         , avg("ProjecteMonthlyIncomeBondora")       as "ProjecteMonthlyIncomeBondora"
          , avg("TotalAvailableFromApi")         as "TotalAvailableFromApi"
     from "AccountSummary"
     group by date(DATE_TRUNC('month', "ValidDateTime"))
