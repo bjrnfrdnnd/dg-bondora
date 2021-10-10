@@ -118,6 +118,8 @@ select
        '0_month' as mm_s,
        date(DATE_TRUNC('month',dd))   AS mm,
        sum("SMP2") as "SMP2",
+       sum("SMTaxPos") as "SMTaxPos",
+       sum("SMProfit") as "SMProfit",
        sum("SMBuys") + sum("AuctionBuys") as "TotalBuys",
        sum("SMSells") as "SMSells",
        sum("SMBuys") as "SMBuys",
@@ -132,6 +134,8 @@ select
        '1_year' as mm_s,
        date(date_trunc('year', dd)) as mm,
        sum("SMP2") as "SMP2",
+       sum("SMTaxPos") as "SMTaxPos",
+       sum("SMProfit") as "SMProfit",
        sum("SMBuys") + sum("AuctionBuys") as "TotalBuys",
        sum("SMSells") as "SMSells",
        sum("SMBuys") as "SMBuys",
@@ -146,6 +150,8 @@ select
        '2_all' as mm_s,
        date('9999-01-01') as mm,
        sum("SMP2") as "SMP2",
+       sum("SMTaxPos") as "SMTaxPos",
+       sum("SMProfit") as "SMProfit",
        sum("SMBuys") + sum("AuctionBuys") as "TotalBuys",
        sum("SMSells") as "SMSells",
        sum("SMBuys") as "SMBuys",
@@ -156,13 +162,13 @@ select
 select
 *
 from
---     ges3
--- order by dd desc
-     ges4
-union
- select * from ges5
-union
- select * from ges6
-order by mm_s, mm desc
+    ges3
+order by dd desc
+--      ges4
+-- union
+--  select * from ges5
+-- union
+--  select * from ges6
+-- order by mm_s, mm desc
 
 ;
