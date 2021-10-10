@@ -54,14 +54,14 @@ f as (
          , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=3) as "3"
          , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4) as "4"
          , sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=8) as "8"
-         , sum("MeanInterest" * "PrincipalRemaining") / sum("PrincipalRemaining") as "totalMI"
-         , (sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=2)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2)) as "2MI"
-         , (sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=100)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100)) as "100MI"
-         , (sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=5)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5)) as "5MI"
-         , (sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=0)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=0)) as "0MI"
-         , (sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=3)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=3)) as "3MI"
-         , (sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=4)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4)) as "4MI"
-         , (sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=8)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=8)) as "8MI"
+         , coalesce(sum("MeanInterest" * "PrincipalRemaining") / sum("PrincipalRemaining"), null) as "totalMI"
+         , coalesce((sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=2)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=2)), null) as "2MI"
+         , coalesce((sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=100)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=100)), null) as "100MI"
+         , coalesce((sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=5)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=5)), null) as "5MI"
+         , coalesce((sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=0)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=0)), null) as "0MI"
+         , coalesce((sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=3)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=3)), null) as "3MI"
+         , coalesce((sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=4)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=4)), null) as "4MI"
+         , coalesce((sum("MeanInterest" * "PrincipalRemaining") FILTER (where "LoanStatusCode"=8)) / (sum("PrincipalRemaining") FILTER (where "LoanStatusCode"=8)), null) as "8MI"
     from e
             group by mm
 )
