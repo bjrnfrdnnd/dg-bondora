@@ -142,7 +142,7 @@ select
        sum("AuctionBuys") as "AuctionBuys"
     from
     ges3
-    group by date(date_trunc('year', dd))
+    group by date_trunc('year', dd)
 )
 ,
 ges6 as (
@@ -162,13 +162,13 @@ select
 select
 *
 from
-    ges3
-order by dd desc
---      ges4
--- union
---  select * from ges5
--- union
---  select * from ges6
--- order by mm_s, mm desc
+--     ges3
+-- order by dd
+     ges4
+union
+ select * from ges5
+union
+ select * from ges6
+order by mm_s, mm desc
 
 ;

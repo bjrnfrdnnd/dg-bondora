@@ -82,7 +82,7 @@ g as (
          , round((sum("5")/sum("total"))::numeric, 4) as "5f"
          , round((sum("0")/sum("total"))::numeric, 4) as "0f"
          , round((sum("3")/sum("total"))::numeric, 4) as "3f"
-         , round((sum("4")/sum("total"))::numeric, 4) as "4f"
+         , case when sum("total") > 0 then round((sum("4")/sum("total"))::numeric, 4) else null end as "4f"
          , round((sum("8")/sum("total"))::numeric, 4) as "8f"
          , case when sum("total") > 0 then round((sum("totalMI" * "total") / sum("total"))::numeric, 4)  end as "totalMI"
          , case when sum("2") > 0 then round((sum("2MI" * "2") / sum("2"))::numeric, 4)  end as "2MI"

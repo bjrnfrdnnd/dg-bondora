@@ -1,3 +1,4 @@
+
 select date("ListedOnDate") as "dd",
        count(iddb) as "#",
        sum("Buy"::int)  as "#Buy",

@@ -1,11 +1,12 @@
--- '2021-10-01'
+-- '2022-04-01'
+-- date(DATE_TRUNC('month', now()))
 WITH
 params0 AS (   -- Parameters for down stream queries
     SELECT
        80 AS max_bars
 )
 , numbers AS (
-    -- Change this query to select real data.
+    -- Change this query to select real data.0
     -- For now we make random set of numbers.
     SELECT date("AdditionDateTime") as dd
     , date(date_trunc('month', date("AdditionDateTime"))) as mm
@@ -13,7 +14,7 @@ params0 AS (   -- Parameters for down stream queries
     , sum("SoldInResale_Price") as price
     from "Investments"
     where
-          date(date_trunc('month', date("EndDateTime"))) = ?
+          date(date_trunc('month', date("EndDateTime"))) = date(DATE_TRUNC('month', now()))
       and
           "InvestmentStatus" ='Sold'
     group by date("AdditionDateTime")

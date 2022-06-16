@@ -1,8 +1,9 @@
 with a as (
-    select '01_day' as "AggregationCategory"
+    select '02_day' as "AggregationCategory"
          , date("ValidDateTime") as "AggregationDatetime"
          , avg("AccountValueApiLoanStatus2")    as "AccountValueApiLoanStatus2"
          , avg("AccountValueApiBondora")        as "AccountValueApiBondora"
+          , avg("Fraction2")        as "Fraction2"
          , avg("PrincipalRemainingLoanStatus2") as "PrincipalRemainingLoanStatus2"
          , avg("PrincipalRemaining")            as "PrincipalRemaining"
          , avg("MeanInterestLoanStatus2")       as "MeanInterestLoanStatus2"
@@ -14,10 +15,11 @@ with a as (
     group by date("ValidDateTime")
 ),
 b as (
-    select '02_month' as "AggregationCategory"
+    select '01_month' as "AggregationCategory"
          , date(DATE_TRUNC('month', "ValidDateTime"))  as "AggregationDatetime"
          , avg("AccountValueApiLoanStatus2")    as "AccountValueApiLoanStatus2"
          , avg("AccountValueApiBondora")        as "AccountValueApiBondora"
+         , avg("Fraction2")        as "Fraction2"
          , avg("PrincipalRemainingLoanStatus2") as "PrincipalRemainingLoanStatus2"
          , avg("PrincipalRemaining")            as "PrincipalRemaining"
          , avg("MeanInterestLoanStatus2")       as "MeanInterestLoanStatus2"
