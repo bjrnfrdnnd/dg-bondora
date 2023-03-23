@@ -3,7 +3,7 @@ with a as (
          , date("ValidDateTime") as "AggregationDatetime"
          , avg("AccountValueApiLoanStatus2")    as "AccountValueApiLoanStatus2"
          , avg("AccountValueApiBondora")        as "AccountValueApiBondora"
-          , avg("Fraction2")        as "Fraction2"
+         , avg("Fraction2")        as "Fraction2"
          , avg("PrincipalRemainingLoanStatus2") as "PrincipalRemainingLoanStatus2"
          , avg("PrincipalRemaining")            as "PrincipalRemaining"
          , avg("MeanInterestLoanStatus2")       as "MeanInterestLoanStatus2"

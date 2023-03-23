@@ -5,19 +5,24 @@ params0 AS (   -- Parameters for down stream queries
     SELECT
        80 AS max_bars
 )
+, _Investments AS (SELECT date("AdditionDateTime")                            as dd
+                               , date(date_trunc('month', date("AdditionDateTime"))) as mm
+                               , sum("SoldInResale_Principal")                       as principal
+                               , sum("SoldInResale_Price")                           as price
+                          from "Investments"
+                          where date(date_trunc('month', date("EndDateTime"))) = date(DATE_TRUNC('month', now()))
+                            and "InvestmentStatus" = 'Sold'
+                          group by date("AdditionDateTime")
+)
 , numbers AS (
     -- Change this query to select real data.0
     -- For now we make random set of numbers.
-    SELECT date("AdditionDateTime") as dd
-    , date(date_trunc('month', date("AdditionDateTime"))) as mm
-    , sum("SoldInResale_Principal") as principal
-    , sum("SoldInResale_Price") as price
-    from "Investments"
-    where
-          date(date_trunc('month', date("EndDateTime"))) = date(DATE_TRUNC('month', now()))
-      and
-          "InvestmentStatus" ='Sold'
-    group by date("AdditionDateTime")
+    SELECT dd
+    ,  mm
+    , principal
+    , price
+    from _Investments
+    where principal > 0 and price > 0
 )
 , overall AS (
     select t.*
@@ -84,7 +89,7 @@ params0 AS (   -- Parameters for down stream queries
         , round(sum_price::numeric, 4) as sum_price
          , round(((sum_price / sum_principal -1)*100)::numeric, 4) as p_gain
          , round((sum_price - sum_principal)::numeric, 4) as gain
-        , pct * 100 as pct
+        , round((pct * 100)::numeric, 4) as pct
         , repeat('0', (bar_pct * max_bars)::int) AS chart
     FROM params,
          percentages,
@@ -95,4 +100,6 @@ SELECT * FROM graph order by bucket_month desc
 -- SELECT * FROM sums
 -- SELECT * FROM overall
 -- SELECT * FROM numbers
+-- SELECT * FROM sum_ranges
+-- SELECT * FROM percentages
 ;
