@@ -4,4 +4,5 @@ select
 from "MyInvestmentItem"
 where "MyInvestmentItem"."PrincipalRemaining" > 0
 group by "UserName"
- order by sum("PrincipalRemaining") desc
+order by sum("PrincipalRemaining") desc
+
