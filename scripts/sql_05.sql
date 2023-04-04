@@ -1,4 +1,4 @@
-10 IS NOT NULL.WHERE select date("ListedOnDate") as "dd"
+select date("ListedOnDate") as "dd"
        , count(iddb) as "#"
        , sum("Buy"::int)  as "#Buy"
        , sum(case when "Buy" and "Success" then 1 else 0 end)  as "#Success"
@@ -6,9 +6,8 @@
        , sum(case when "Buy" and not "Success"
                            and "FailureReason" like ('%Not Found: Item is not on sale%') then 1 else 0 end) as "#ItemNotFound"
         , sum(case when "Buy" and not "Success"
-                     0b      and "FailureReason" like ('%Conflict: Cannot buy your own item%') then 1 else 0 end)  as "#OwnItem"#is a anima he can expect that's at' ||
-                      'vc101b'10
-        , su-a10->10  m(case when "Buy" and not "Success"
+                           and "FailureReason" like ('%Conflict: Cannot buy your own item%') then 1 else 0 end)  as "#OwnItem"
+        , sum(case when "Buy" and not "Success"
                            and "FailureReason" like ('%Timeout occurred%') then 1 else 0 end)  as "#timeout"
         , sum(case when "Buy" and not "Success"
                            and "FailureReason" like ('%An unhandled exception occurred%') then 1 else 0 end)  as "#unhandled"
